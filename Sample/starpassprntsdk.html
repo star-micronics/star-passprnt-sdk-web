@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>PassPRNT</title>
+		<script type="text/javascript">
+		var changeHref;
+		
+		var htmlText = "";
+		var pdfText  = "";
+
+		function response() {
+			createURL();
+			getParameter();
+		}
+
+		function getParameter() {
+			document.getElementById("res").value = location.search.substring(1);
+		}
+
+		function createURL() {
+			changeHref = 'starpassprnt://v1/print/nopreview?';
+			
+			// back
+			switch (document.getElementById("back").value) {
+				case "free":
+					changeHref = changeHref + "&back=" + encodeURIComponent(document.getElementById("back_free").value);
+					break;
+				default:
+					changeHref = changeHref + "&back=" + encodeURIComponent(window.location.href);
+			}
+
+			// html
+			switch (document.getElementById("html").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&html=" + encodeURIComponent(htmlText);
+					break;
+			}
+			// pdf
+			switch (document.getElementById("pdf").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&pdf=" + encodeURIComponent(pdfText);
+					break;
+			}
+			// url
+			switch (document.getElementById("url").value) {
+				case "none":
+					break;
+				case "html_receipt_sample":
+				case "pdf_receipt_sample":
+				case "free":
+					changeHref = changeHref + "&url=" + encodeURIComponent(document.getElementById("url_free").value);
+					break;
+				default:
+					break;
+			}
+			// port
+			switch (document.getElementById("port").value) {
+				case "none":
+					break;
+				case "free":
+					changeHref = changeHref + "&port=" + document.getElementById("port_free").value;
+					break;
+				default:
+					changeHref = changeHref + "&port=" + document.getElementById("port").value;
+					break;
+			}
+			// settings
+			switch (document.getElementById("settings").value) {
+				case "none":
+					break;
+				case "blank":
+					changeHref = changeHref + "&settings=";
+					break;
+				default:
+					changeHref = changeHref + "&settings=" + document.getElementById("settings").value;
+					break;
+			}
+			// timeout
+			switch (document.getElementById("timeout").value) {
+				case "none":
+					break;
+				case "free":
+					changeHref = changeHref + "&timeout=" + document.getElementById("timeout_free").value;
+					break;
+				default:
+					changeHref = changeHref + "&timeout=" + document.getElementById("timeout").value;
+					break;
+			}
+			// size
+			switch (document.getElementById("size").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&size=" + document.getElementById("size").value;
+					break;
+			}
+			// drawer
+			switch (document.getElementById("drawer").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&drawer=" + document.getElementById("drawer").value;
+					break;
+			}
+			// drawerpulse
+			switch (document.getElementById("drawerpulse").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&drawerpulse=" + document.getElementById("drawerpulse").value;
+					break;
+			}
+			// buzzer
+			switch (document.getElementById("buzzer").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&buzzer=" + document.getElementById("buzzer").value;
+					break;
+			}
+			// buzzerchannel
+			switch (document.getElementById("buzzerchannel").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&buzzerchannel=" + document.getElementById("buzzerchannel").value;
+					break;
+			}
+			// buzzerrepeat
+			switch (document.getElementById("buzzerrepeat").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&buzzerrepeat=" + document.getElementById("buzzerrepeat").value;
+					break;
+			}
+			// buzzerdrivetime
+			switch (document.getElementById("buzzerdrivetime").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&buzzerdrivetime=" + document.getElementById("buzzerdrivetime").value;
+					break;
+			}
+			// buzzerdelaytime
+			switch (document.getElementById("buzzerdelaytime").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&buzzerdelaytime=" + document.getElementById("buzzerdelaytime").value;
+					break;
+			}
+			// sound
+			switch (document.getElementById("sound").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&sound=" + document.getElementById("sound").value;
+					break;
+			}
+			// soundstoragearea
+			switch (document.getElementById("soundstoragearea").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&soundstoragearea=" + document.getElementById("soundstoragearea").value;
+					break;
+			}
+			// soundnumber
+			switch (document.getElementById("soundnumber").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&soundnumber=" + document.getElementById("soundnumber").value;
+					break;
+			}
+			// soundvolume
+			switch (document.getElementById("soundvolume").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&soundvolume=" + document.getElementById("soundvolume").value;
+					break;
+			}
+			// blackmark
+			switch (document.getElementById("blackmark").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&blackmark=" + document.getElementById("blackmark").value;
+					break;
+			}
+			// cut
+			switch (document.getElementById("cut").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&cut=" + document.getElementById("cut").value;
+			}
+			// popup
+			switch (document.getElementById("popup").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&popup=" + document.getElementById("popup").value;
+			}
+			
+			document.getElementById("send_data").value = changeHref;
+		}
+
+		function getHtml(callback) {
+			if (document.getElementById("html").value === 'none') {
+				htmlText = '';
+			}
+			else if (document.getElementById("html").value === 'free') {
+				htmlText = document.getElementById("html").value;
+			}
+			else {
+				var file = "resource\/" + document.getElementById("html").value + "\.html";
+				
+				var htmlFile = new XMLHttpRequest();
+				htmlFile.callback = callback;
+				htmlFile.open("GET", file, true);
+				htmlFile.onreadystatechange = function () {
+					if (htmlFile.readyState === 4) {
+						if (htmlFile.status === 0 || htmlFile.status === 200) {
+							htmlText = htmlFile.responseText;
+						}
+					}
+
+					this.callback.apply(this, this.argument);
+				}
+				htmlFile.send(null);
+			}
+			
+			createURL();
+		}
+		
+
+		function getPdf(callback) {
+			if (document.getElementById("pdf").value === 'none') {
+			    pdfText = "";
+			}
+			else {
+				var file = "resource\/" + document.getElementById("pdf").value + "\.pdf";
+
+				var pdfFile = new XMLHttpRequest();
+				pdfFile.callback = callback;
+				pdfFile.open("GET", file, true);
+				pdfFile.responseType = "arraybuffer";
+				pdfFile.onload = function () {
+					var binary = new Uint8Array(this.response);
+					var binaryString = "";
+					for (var i=0; i<binary.byteLength; i++) {
+						binaryString += String.fromCharCode(binary[i]);
+					}
+
+					// base64 encoding
+					pdfText = window.btoa(binaryString);
+
+					this.callback.apply(this, this.argument);
+				}
+				pdfFile.send(null);
+			}
+			
+			createURL();
+		}
+
+		function setUrl() {
+			switch (document.getElementById("url").value) {
+				case "none":
+					document.getElementById("url_free").value = "";
+					break;
+				case "html_receipt_sample":
+					document.getElementById("url_free").value = "https://www.star-m.jp/products/s_print/sdk/passprnt/sample/resource/receipt_sample.html";
+					break;
+				case "pdf_receipt_sample":
+					document.getElementById("url_free").value = "https://www.star-m.jp/products/s_print/sdk/passprnt/sample/resource/receipt_sample.pdf";
+					break;
+				case "free":
+				default:
+					break;
+			}
+
+			createURL();
+		}
+		</script>
+		<noscript>
+			Your browser does not support JavaScript!
+		</noscript>
+	</head>
+	<body bgcolor="aliceblue" onLoad="response()">
+		<h3>Star PassPRNT Web SDK</h3>
+		
+		How to use<br>
+		<ul>
+			<li>You can change any setting, then tap the "Print" button.
+			<li>After printing, response from Star PassPRNT is displayed below.
+		</ul>
+		
+		Note for Windows<br>
+		<ul>
+			<li>Star PassPRNT for Windows UWP does not support "pdf" query.
+			<li>Recommend to use "url" query for printing. Many web browsers for Windows have a short URL query length limit, so printing with 'html' query may not be possible.
+		</ul>
+
+		<hr>
+
+		Response from Star PassPRNT<br>
+		<input type="text" id="res" size="100"><br>
+		<form><input type="button" value="Close this tab" onClick="window.open('about:blank','_self').close();" style="font-size:12px; WIDTH: 120px; HEIGHT: 20px"></form>
+
+		<hr>
+
+		<form name="myForm">
+			<table  bgcolor="white" cellspacing="0"><tr><td>
+				<table cellpadding="5" cellspacing="2">
+					<tr>
+						<th bgcolor="lightsteelblue">Query</th>
+						<th bgcolor="lightsteelblue" colspan="2">Parameter</th>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">port</td>
+						<td bgcolor="cornflowerblue">
+							<select id="port" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="free">USE RIGHT VALUE</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+							<input type="text" id="port_free" size="60" onChange="createURL()">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">settings</td>
+						<td bgcolor="cornflowerblue">
+							<select id="settings" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="blank">(blank)</option>
+								<option value="escpos">escpos</option>
+								<option value="portable">portable</option>
+								<option value="portable;escpos">portable;escpos</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">timeout</td>
+						<td bgcolor="cornflowerblue">
+							<select id="timeout" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="10000">10000</option>
+								<option value="free">USE RIGHT VALUE</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+							<input type="text" id="timeout_free" size="60" onChange="createURL()">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">size</td>
+						<td bgcolor="cornflowerblue">
+							<select id="size" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="2">2</option>
+								<option value="2w1">2w1</option>
+								<option value="2w2">2w2</option>
+								<option value="2w3">2w3</option>
+								<option value="2w4">2w4</option>
+								<option value="3">3</option>
+								<option value="3w">3w</option>
+								<option value="3w2">3w2</option>
+								<option value="4">4</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">drawer</td>
+						<td bgcolor="cornflowerblue">
+							<select id="drawer" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="off">off</option>
+								<option value="ahead">ahead</option>
+								<option value="after">after</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">drawerpulse</td>
+						<td bgcolor="cornflowerblue">
+							<select id="drawerpulse" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="200">200</option>
+								<option value="500">500</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">buzzer</td>
+						<td bgcolor="cornflowerblue">
+							<select id="buzzer" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="off">off</option>
+								<option value="ahead">ahead</option>
+								<option value="after">after</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">buzzerchannel</td>
+						<td bgcolor="cornflowerblue">
+							<select id="buzzerchannel" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="channel1">channel1</option>
+								<option value="channel2">channel2</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">buzzerrepeat</td>
+						<td bgcolor="cornflowerblue">
+							<select id="buzzerrepeat" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="5">5</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">buzzerdrivetime</td>
+						<td bgcolor="cornflowerblue">
+							<select id="buzzerdrivetime" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="200">200</option>
+								<option value="500">500</option>
+								<option value="1000">1000</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">buzzerdelaytime</td>
+						<td bgcolor="cornflowerblue">
+							<select id="buzzerdelaytime" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="200">200</option>
+								<option value="500">500</option>
+								<option value="1000">1000</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">sound</td>
+						<td bgcolor="cornflowerblue">
+							<select id="sound" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="off">off</option>
+								<option value="ahead">ahead</option>
+								<option value="after">after</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">soundstoragearea</td>
+						<td bgcolor="cornflowerblue">
+							<select id="soundstoragearea" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="area1">area1</option>
+								<option value="area2">area2</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">soundnumber</td>
+						<td bgcolor="cornflowerblue">
+							<select id="soundnumber" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">soundvolume</td>
+						<td bgcolor="cornflowerblue">
+							<select id="soundvolume" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">back</td>
+						<td bgcolor="cornflowerblue">
+							<select id="back" size="1" onChange="createURL()">
+								<option value="thispage" selected>THIS PAGE</option>
+								<option value="free">USE RIGHT VALUE</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+							<input type="text" id="back_free" size="60" onChange="createURL()">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">blackmark</td>
+						<td bgcolor="cornflowerblue">
+							<select id="blackmark" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="disable">disable</option>
+								<option value="enable">enable</option>
+								<option value="enableAndDetectAtPowerOn">enableAndDetectAtPowerOn</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">cut</td>
+						<td bgcolor="cornflowerblue">
+							<select id="cut" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="partial">partial</option>
+								<option value="full">full</option>
+								<option value="tearbar">tearbar</option>
+								<option value="nocut">nocut</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">popup</td>
+						<td bgcolor="cornflowerblue">
+							<select id="popup" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="enable">enable</option>
+								<option value="disable">disable</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">html</td>
+						<td bgcolor="cornflowerblue">
+							<select id="html" size="1" onChange="getHtml(createURL)">
+								<option value="none" selected>----</option>
+								<option value="receipt_sample">Receipt sample</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">pdf</td>
+						<td bgcolor="cornflowerblue">
+							<select id="pdf" size="1" onChange="getPdf(createURL)">
+								<option value="none" selected>----</option>
+								<option value="receipt_sample">Receipt sample</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="lightskyblue">url</td>
+						<td bgcolor="cornflowerblue">
+							<select id="url" size="1" onChange="setUrl()">
+								<option value="none" selected>----</option>
+								<option value="html_receipt_sample" >HTML Receipt Sample</option>
+								<option value="pdf_receipt_sample"  >PDF Receipt Sample</option>
+								<option value="free">USE RIGHT VALUE</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+							<input type="text" id="url_free" size="60" onChange="createURL()">
+						</td>
+					</tr>
+				</table>
+			</td></tr></table>
+			<br>
+			<form><input type="button" onclick="location.href=changeHref" value="PRINT" style="font-size:16px; WIDTH: 120px; HEIGHT: 40px; background-color:midnightblue; color:white;"></form>
+			<br>
+			<br>
+			Sending URL to Star PassPRNT<br>
+			<textarea id="send_data" cols="80" rows="30" wrap="soft"></textarea><br>
+		</form>
+	
+	<hr>
+	
+	<footer>
+	<p>Sample Ver 1.1.0</p>
+	<p><small>Copyright 2020 - 2021 Star Micronics Co., Ltd. All rights reserved.</small></p>
+	</footer>
+
+	</body>
+</html>
