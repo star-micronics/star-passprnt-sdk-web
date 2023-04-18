@@ -195,6 +195,14 @@
 					changeHref = changeHref + "&blackmark=" + document.getElementById("blackmark").value;
 					break;
 			}
+			// gap
+			switch (document.getElementById("gap").value) {
+				case "none":
+					break;
+				default:
+					changeHref = changeHref + "&gap=" + document.getElementById("gap").value;
+					break;
+			}
 			// cut
 			switch (document.getElementById("cut").value) {
 				case "none":
@@ -368,11 +376,13 @@
 						<td bgcolor="cornflowerblue">
 							<select id="size" size="1" onChange="createURL()">
 								<option value="none" selected>----</option>
+								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="2w1">2w1</option>
 								<option value="2w2">2w2</option>
 								<option value="2w3">2w3</option>
 								<option value="2w4">2w4</option>
+								<option value="2w5">2w5</option>
 								<option value="3">3</option>
 								<option value="3w">3w</option>
 								<option value="3w2">3w2</option>
@@ -566,6 +576,19 @@
 						</td>
 					</tr>
 					<tr>
+						<td bgcolor="lightskyblue">gap</td>
+						<td bgcolor="cornflowerblue">
+							<select id="gap" size="1" onChange="createURL()">
+								<option value="none" selected>----</option>
+								<option value="disable">disable</option>
+								<option value="enable">enable</option>
+								<option value="enableAndDetectAtPowerOn">enableAndDetectAtPowerOn</option>
+							</select>
+						</td>
+						<td bgcolor="cornflowerblue">
+						</td>
+					</tr>
+					<tr>
 						<td bgcolor="lightskyblue">cut</td>
 						<td bgcolor="cornflowerblue">
 							<select id="cut" size="1" onChange="createURL()">
@@ -640,8 +663,8 @@
 	<hr>
 	
 	<footer>
-	<p>Sample Ver 1.1.0</p>
-	<p><small>Copyright 2020 - 2021 Star Micronics Co., Ltd. All rights reserved.</small></p>
+	<p>Sample Ver 1.2.0</p>
+	<p><small>Copyright 2020 - 2023 Star Micronics Co., Ltd. All rights reserved.</small></p>
 	</footer>
 
 	</body>

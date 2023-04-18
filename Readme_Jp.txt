@@ -1,5 +1,5 @@
 ************************************************************
-      Star PassPRNT Web SDK Ver 1.1.0
+      Star PassPRNT Web SDK Ver 1.2.0
          Readme_Jp.txt                  スター精密（株）
 ************************************************************
 
@@ -27,12 +27,11 @@
 
   詳細は別紙ドキュメントファイルを参照ください。
 
-
 ==========
  2. 内容
 ==========
 
-  PassPRNT_Web_SDK_Ver1.1.0_20211029
+  PassPRNT_Web_SDK_Ver1.2.0
   |
   | Readme_En.txt                       // リリースノート(英語)
   | Readme_Jp.txt                       // リリースノート(日本語)
@@ -43,33 +42,33 @@
   | UsersManual_UWP.url
   +- Samples                            // Star PassPRNT用サンプルプログラム
 
-
 =============
  3. 適用
 =============
+
   ■ 対象ソフトウェア
-   PassPRNT Ver2.5.0 for iOS / Android / Windows UWP
+   PassPRNT Ver 2.7.0 for iOS / Android / Windows UWP
 
   ■ 対象プリンタモデル
-   ◇ プリンタモデル (F/W ver)
-   ◇ 対応インターフェース
-
-        Users Manualをご参照ください。
+   Users Manualをご参照ください。
 
 ===========
  4. 著作権
 ===========
 
-  スター精密（株）Copyright 2020-2021
-
+  スター精密（株）Copyright 2020-2023
 
 ==================================
  5. Star PassPRNT Web SDK 更新履歴
 ==================================
 
+ Ver 1.2.0
+  2023/04/10  : `gap`クエリを追加
+                `size`クエリに`1`と`2w5`を追加
+                対象OS、対象ソフトウェアを更新
+
  Ver 1.1.0
-  2021/10/29  : TSP100IVに対応
-                ブザー(BU01), メロディースピーカー(mC-Sound)のサポートを追加
+  2021/10/29  : ブザー(BU01), メロディースピーカー(mC-Sound)のサポートを追加
 
  Ver 1.0
   2020/01/23  : 新規リリース
