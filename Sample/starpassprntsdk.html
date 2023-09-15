@@ -5,7 +5,7 @@
 		<title>PassPRNT</title>
 		<script type="text/javascript">
 		var changeHref;
-		
+
 		var htmlText = "";
 		var pdfText  = "";
 
@@ -20,7 +20,7 @@
 
 		function createURL() {
 			changeHref = 'starpassprnt://v1/print/nopreview?';
-			
+
 			// back
 			switch (document.getElementById("back").value) {
 				case "free":
@@ -217,7 +217,7 @@
 				default:
 					changeHref = changeHref + "&popup=" + document.getElementById("popup").value;
 			}
-			
+
 			document.getElementById("send_data").value = changeHref;
 		}
 
@@ -230,7 +230,7 @@
 			}
 			else {
 				var file = "resource\/" + document.getElementById("html").value + "\.html";
-				
+
 				var htmlFile = new XMLHttpRequest();
 				htmlFile.callback = callback;
 				htmlFile.open("GET", file, true);
@@ -245,10 +245,10 @@
 				}
 				htmlFile.send(null);
 			}
-			
+
 			createURL();
 		}
-		
+
 
 		function getPdf(callback) {
 			if (document.getElementById("pdf").value === 'none') {
@@ -275,7 +275,7 @@
 				}
 				pdfFile.send(null);
 			}
-			
+
 			createURL();
 		}
 
@@ -304,13 +304,13 @@
 	</head>
 	<body bgcolor="aliceblue" onLoad="response()">
 		<h3>Star PassPRNT Web SDK</h3>
-		
+
 		How to use<br>
 		<ul>
 			<li>You can change any setting, then tap the "Print" button.
 			<li>After printing, response from Star PassPRNT is displayed below.
 		</ul>
-		
+
 		Note for Windows<br>
 		<ul>
 			<li>Star PassPRNT for Windows UWP does not support "pdf" query.
@@ -383,6 +383,8 @@
 								<option value="2w3">2w3</option>
 								<option value="2w4">2w4</option>
 								<option value="2w5">2w5</option>
+								<option value="2w6">2w6</option>
+								<option value="2w7">2w7</option>
 								<option value="3">3</option>
 								<option value="3w">3w</option>
 								<option value="3w2">3w2</option>
@@ -659,11 +661,11 @@
 			Sending URL to Star PassPRNT<br>
 			<textarea id="send_data" cols="80" rows="30" wrap="soft"></textarea><br>
 		</form>
-	
+
 	<hr>
-	
+
 	<footer>
-	<p>Sample Ver 1.2.0</p>
+	<p>Sample Ver 1.3.0</p>
 	<p><small>Copyright 2020 - 2023 Star Micronics Co., Ltd. All rights reserved.</small></p>
 	</footer>
 

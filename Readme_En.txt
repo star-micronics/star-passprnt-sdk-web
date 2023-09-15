@@ -1,5 +1,5 @@
 ﻿************************************************************
-      Star PassPRNT Web SDK Ver 1.2.0
+      Star PassPRNT Web SDK Ver 1.3.0
          Readme_En.txt             Star Micronics Co., Ltd.
 ************************************************************
 
@@ -31,7 +31,7 @@
  2. Contents
 =============
 
-  PassPRNT_Web_SDK_Ver1.2.0
+  PassPRNT_Web_SDK_Ver1.3.0
   |
   | Readme_En.txt                       // Release Note(English)
   | Readme_Jp.txt                       // Release Note(Japanese)
@@ -47,7 +47,7 @@
 =================
 
   [Software]
-    PassPRNT Ver 2.7.0 for iOS / Android / Windows UWP
+    PassPRNT Ver 2.8.0 for iOS / Android / Windows UWP
 
   [Printer Model]
     Please refer to Users Manual.
@@ -61,6 +61,10 @@
 ==========================================
  5. Star PassPRNT Web SDK Release History
 ==========================================
+
+ Ver 1.3.0
+  2023/09/07  : Added `2w6` and `2w7` to `size` query.
+                Updated target OS and target software.
 
  Ver 1.2.0
   2023/04/10  : Added `gap` query.

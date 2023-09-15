@@ -1,5 +1,5 @@
 ************************************************************
-      Star PassPRNT Web SDK Ver 1.2.0
+      Star PassPRNT Web SDK Ver 1.3.0
          Readme_Jp.txt                  スター精密（株）
 ************************************************************
 
@@ -31,7 +31,7 @@
  2. 内容
 ==========
 
-  PassPRNT_Web_SDK_Ver1.2.0
+  PassPRNT_Web_SDK_Ver1.3.0
   |
   | Readme_En.txt                       // リリースノート(英語)
   | Readme_Jp.txt                       // リリースノート(日本語)
@@ -47,7 +47,7 @@
 =============
 
   ■ 対象ソフトウェア
-   PassPRNT Ver 2.7.0 for iOS / Android / Windows UWP
+   PassPRNT Ver 2.8.0 for iOS / Android / Windows UWP
 
   ■ 対象プリンタモデル
    Users Manualをご参照ください。
@@ -61,6 +61,10 @@
 ==================================
  5. Star PassPRNT Web SDK 更新履歴
 ==================================
+
+ Ver 1.3.0
+  2023/09/07  : `size`クエリに`2w6`と`2w7`を追加
+                対象OS、対象ソフトウェアを更新
 
  Ver 1.2.0
   2023/04/10  : `gap`クエリを追加
